@@ -1,8 +1,4 @@
-# Accueil du blog
-
-```{seealso}
-Bienvenue sur mon site !
-```
+# 🪐 Accueil du blog
 
 ```{toctree}
 ---
@@ -12,6 +8,7 @@ hidden:
 physique
 chimie
 ecologie
+education
 informatique
 a_propos
 ```

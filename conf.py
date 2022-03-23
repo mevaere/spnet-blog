@@ -46,14 +46,17 @@ html_theme_options = {
     "extra_navbar": "",
     "show_toc_level": 3,
     "home_page_in_toc": True,
-    "repository_url": "https://github.com/mevaere/blog-spnet.git",
+    "repository_url": "https://github.com/mevaere/spnet",
     "use_repository_button": True,
+    "logo_only": True,
+    "use_issues_button":True
 }
 
 html_last_updated_fmt = "%d %b %Y à %H:%M"
 html_show_copyright = False
+html_favicon = '_medias/favicon.png'
 html_theme = 'sphinx_book_theme'
-html_title = ''
+html_title = 'Sciences-Physiques.NET'
 html_logo = "_medias/logo.png"
 html_static_path = ["_static"]
 html_css_files = ["custom.css"]
