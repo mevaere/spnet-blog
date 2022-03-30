@@ -31,6 +31,7 @@ release = '0.0.0.0'
 # ones.
 extensions = [
     "myst_parser",
+    'sphinx_copybutton'
 ]
 
 myst_enable_extensions = ["dollarmath", "amsmath"]
@@ -44,12 +45,13 @@ exclude_patterns = ['README.md', 'spnetblogvenv', 'venv', '_build', 'Thumbs.db',
 
 html_theme_options = {
     "extra_navbar": "",
-    "show_toc_level": 3,
+    "show_toc_level": 2,
     "home_page_in_toc": True,
     "repository_url": "https://github.com/mevaere/spnet",
     "use_repository_button": True,
     "logo_only": True,
-    "use_issues_button":True
+    "show_navbar_depth": 1,
+    "use_issues_button": True,
 }
 
 html_last_updated_fmt = "%d %b %Y à %H:%M"

@@ -1,8 +1,16 @@
-# 🪐 Accueil du blog
+# 🪐 Accueil
+
+## 📑 Nouveautés
+
+<br>
+
+|     Date     | Thème | Article  |
+|:------------:| :---: | :---: |
+|30 mars 2022 | 🐍 Informatique  | [](python/shareware) |
 
 ```{toctree}
 ---
-maxdepth: 2
+maxdepth: 1
 hidden:
 ---
 physique
