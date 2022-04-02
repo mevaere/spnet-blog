@@ -30,8 +30,9 @@ release = '0.0.0.0'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    "myst_parser",
-    'sphinx_copybutton'
+    # "myst_parser",
+    "sphinx_copybutton",
+    "myst_nb"
 ]
 
 myst_enable_extensions = ["dollarmath", "amsmath"]
