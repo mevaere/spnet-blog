@@ -55,17 +55,3 @@ Coucou c'est nous
 <input type="checkbox"> Eat <br>
 <input type="checkbox"> Sleep <br>
 <input type="checkbox" checked> Go Fishin <br>
-
-
-```{toctree}
----
-maxdepth: 1
-hidden:
----
-physique
-chimie
-ecologie
-education
-informatique
-a_propos
-```
