@@ -61,5 +61,5 @@ html_favicon = '_medias/favicon.png'
 html_theme = 'sphinx_book_theme'
 html_title = 'Sciences-Physiques.NET'
 html_logo = "_medias/logo.png"
-html_static_path = ["_static"]
+html_static_path = ["_static", '_medias/full']
 html_css_files = ["custom.css"]
