@@ -1,9 +1,13 @@
 # 💻 Informatique
 
+
+
 ```{toctree}
 ---
 maxdepth: 1
+hidden:
 ---
-python
+informatique/python
+informatique/serveur
 ```
 

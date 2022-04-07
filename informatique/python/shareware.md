@@ -68,7 +68,7 @@ Now convert in `c` and compile with `msvc` in `fib.cp38-win_amd64.pyd`
 python setup.py build_ext --inplace
 ```
 
-| ![Image 1](../_medias/python/shareware1.png)
+| ![Image 1](../../_medias/informatique/python/shareware1.png)
 |:--:| 
 | * **DLL Export Viewer** tells us this is a valid DLL* |
 
@@ -151,7 +151,7 @@ In order to compile, you need to move two files from the sdk path of *Enigma Pro
 File 1 : `enigma_ide.h`
 File 2 : `enigma_ide64.lib`
 
-![Image 2](../_medias/python/shareware2.png)
+![Image 2](../../_medias/informatique/python/shareware2.png)
 
 In `enigma_ide.h`, just insert the following line.
 
@@ -208,7 +208,7 @@ python setup.py build_ext --inplace
 
 Protect the DLL with *Enigma Protector*
 
-![Image 3](../_medias/python/shareware3.png)
+![Image 3](../../_medias/informatique/python/shareware3.png)
 
 Use-it like a normal module
 
@@ -216,7 +216,7 @@ Use-it like a normal module
 import test_it
 ```
 
-![Image 4](../_medias/python/shareware4.png)
+![Image 4](../../_medias/informatique/python/shareware4.png)
 
 ## 🎇 BONUS : Using Widestring Char in Cython - **wchar_t***
 

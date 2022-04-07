@@ -1,7 +1,5 @@
 # 🎓 Curriculum Vitæ
 
----
-
 ```{image} ../_medias/a_propos/rm.jpg
 :alt: Python
 :width: 150px

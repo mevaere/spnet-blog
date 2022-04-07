@@ -3,10 +3,6 @@
 ## 🔭 SP.NET
 
 
-```{download} ../_medias/spnet-app/home.png
-```
-
-
 ```{image} ../_medias/spnet-app/home_tb.png
 :width: 350px
 :target: ../_static/spnet-app/home.png
