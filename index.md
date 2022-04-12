@@ -9,7 +9,7 @@
 |     Date     |       Thème       |              Article              |
 |:------------:|:-----------------:|:---------------------------------:|
 | 9 Avril 2022 | 🐧 Serveur Ubuntu | [](informatique/serveur.md)  |
-| 30 mars 2022 |  🐍 Informatique  | [](informatique/python/shareware) |
+| 30 mars 2022 |  🐍 Informatique  | [](informatique/python/protection) |
 
 ```{toctree}
 ---

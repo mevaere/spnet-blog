@@ -2,4 +2,4 @@
 
 ## 🛡 Securité
 
-- [](python/shareware)
+- [](python/protection)

@@ -2,7 +2,7 @@
 orphan: true
 ---
 
-# ⚔ Protect your python shareware 🇬🇧
+# ⚔ Protect your python code 🇬🇧
 
 ## ℹ Introduction
 
@@ -146,7 +146,7 @@ LPCWSTR __declspec(dllimport) __stdcall EP_RegHardwareIDW();
 
 ### ➕ Add enigma headers files in working dir
 
-In order to compile, you need to move two files from the sdk path of *Enigma Protector*. 
+In order to compile, you need to move two files from the sdk/VC path of *Enigma Protector*. You will need to use MSVC. 
 
 File 1 : `enigma_ide.h`
 File 2 : `enigma_ide64.lib`
