@@ -23,7 +23,7 @@ Difficulty to implement : ⭐
 |                                   Hardware lock                                    |                             More weak protection than Enigma Protector                             |
 |                                Seamless Replacement                                |                               No trial (need a double distribution)                                |
 |                           Easy packing with PyInstaller                            |                          Need to have a licence file for each final user                           |
-|                            Can protect all the program                             |                                                                                                    | 
+|                          Can protect the complete program                          |                 PyArmor Core need an update for each new plateform/python version                  | 
 
 ### 📜 Obfuscating a script
 
@@ -50,20 +50,22 @@ Difficulty to implement : ⭐⭐⭐
 |          Message designer           |                                          |
 |           Protect strings           |                                          |
 | VirtualBox for file/registry hiding |                                          |
-|       Virtual Machine (RISC)        |                                          |
+|    Virtual Machine (RISC)           |                                          |
+|  Independant of new python version  |                                          |
+
 
 ## 🔧 Prerequisites
-- Using windows (enigma protector works natively on windows, 🍷 wine is suitable for running EXE on 🐧 Linux )
+- **Microsoft windows** (enigma protector works natively on windows, 🍷 wine is suitable for running EXE on 🐧 Linux )
 - Cython
-- [MSVC build-tools](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2019)
-- The [enigma protector software](https://enigmaprotector.com/) (199$), the trial version will obviously raise some alerts from antivirus cause some crackers & hackers use it to
+- [MSVC build-tools](https://visualstudio.microsoft.com/downloads/)
+- The [enigma protector software](https://enigmaprotector.com/) (199$), the trial version will raise some alerts from antivirus, cause some crackers & hackers use it to
   protect/hide their malwares.
 ## ⚙ Installing and using Cython
 ```{admonition} About Cython
 Cython is a programming language that aims to be a superset of the Python programming language, designed to give C-like performance with code that is written mostly in Python with optional additional C-inspired syntax. Cython is a compiled language that is typically used to generate CPython extension modules.
 ```
 Cython could generate with your Python code a **c++ file** which could be compiled in a dynamic link library (DLL) which could be directly called by your python code.
-### 🔰 Setup
+### 🔰 Install Cython
 ```bash
 pip install cython
 ```
@@ -90,34 +92,45 @@ setup(
     ext_modules=cythonize("fib.pyx"),
 )
 ```
-Now convert in `c` and compile with `msvc` in `fib.cp38-win_amd64.pyd`
+
+Run the following command : 
+
 ```bash
 python setup.py build_ext --inplace
 ```
+
+It converts it in `c` and compile with `msvc` in `fib.cp38-win_amd64.pyd`
+
 | ![Image 1](../../_medias/informatique/python/shareware1.png)
 |:--:| | * **DLL Export Viewer** tells us this is a valid DLL* |
-Calling the dll created is really easy from python. It's just treating it like a module.
+
+Calling the dll created is really easy from python. Python treats it like a module.
 ```python
 import fib
 fib.fib(50000000)  # will give the expected result
 ```
 
-
 ## 🛡 Protecting your app
+
 The goal is to protect your python app. In order to do this, you will need :
-- some of your most important code in a .pyx file which will be converted in c++, only this code will be protected
+
+- some of your most important code in a `.pyx file` which will be converted in `c++`, this code will be protected
 - call the API of enigma protector to introduce the protection (RISC virtual machine etc.)
 - packed the dll produced by cython with enigma protector
 - Use it !
+
 ```{important}
-As you know, C compilation is largely faster than python cause it doesn't deal with python object structure. C is also faster when it deals with loops, and cause it doesn't deal with the GIL, cython gives you the opportunity to use all your CPU cores.
+C compiled file are faster than python cause they doesn't deal with python object structure. C files are also faster when they deals with loops, and cause they doesn't deal with the GIL, cython gives you the opportunity to use all your CPU cores.
 ```
+
 ```{warning}
 Be carreful, GIL exists to avoid some complex problem with memory access to shared variables and handle correctly garbage collector.
 ```
+
 ### ⚒ Prepare the compilation
-Here we are working with a `c++` file. It doesn't change a lot except `setup.py`.
+Here we are working with a `c++` file. It doesn't change a lot except in `setup.py`.
 File : `setup.py`
+
 ```python
 from distutils.core import setup
 from distutils.extension import Extension
@@ -134,6 +147,8 @@ setup(
     cmdclass={'build_ext': build_ext}
 )
 ```
+
+
 ### 👓 Watch the API
 ````{admonition} Enigma Protector API
 A Marker is a set of bytes placed into the source code and helping Enigma Protector find the code inside markers for processing. A marker consists of two parts: begin marker and end marker.
@@ -208,7 +223,20 @@ Use-it like a normal module
 import test_it
 ```
 ![Image 4](../../_medias/informatique/python/shareware4.png)
-## 🎇 BONUS : Using Widestring Char in Cython - **wchar_t***
+
+
+### 👓 Hardware Lock
+
+### 👓 Test registration
+
+### 👓 Access registred feature
+
+### 👓 File virtualization
+
+### 👓 Protected strings
+
+
+## 🎇 BONUS : Using Widestring Char (unicode) in Cython - **wchar_t***
 ```python
 from cpython.ref cimport
 PyObject
