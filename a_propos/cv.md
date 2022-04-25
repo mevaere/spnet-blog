@@ -26,13 +26,14 @@
 
 - 🏃‍♂ Course à pieds
 - 🎸 Guitare
-- ♟ Echecs
 
 **Associations**
 
-- UDPPC : **U**nion **D**es **P**rofesseurs de **P**hysique **C**himie
+- **C**ourir **à** **N**yons
 - AFIS : **A**ssociation **F**rançaise pour l'**I**nformation **S**cientifique
-- Société des agrégés de l’université
+- Société des agrégés de l'université
+- UDPPC : **U**nion **D**es **P**rofesseurs de **P**hysique **C**himie
+
 
 **Langue étangère**
 
