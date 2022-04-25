@@ -6,15 +6,14 @@ orphan: true
 
 ## ℹ Introduction
 
-Python scripts can be protected in order to avoid stealing of intellectual property, algorithms or anything else you want to hide from the final user. As using an interpreter (
-usually CPython), your code is translated from human readable language (python) in python bytecodes (stored in `__pycache__`) ; with some modifications of CPython source code, you
+Python scripts can be protected in order to avoid stealing of intellectual property, algorithms or anything else you want to hide from the final user. As using an interpreter (usually CPython), your code is translated from human readable language (python) in python bytecodes (stored in `__pycache__`) ; with some modifications of CPython source code, you
 could extract all the code (even if it's obfuscated) without difficulties.
 
 ```{admonition} How to dump code object to disk ?
 Compile Python from source. Modify the `_PyEval_EvalFrameDefault` function such that it dumps the code object to disk.
 ```
 
-In this article, I propose two ways of protecting your python scripts. An easy one using a python tools named **PyArmor** which relies on an external unknown not open-source
+In this article, I propose two ways of protecting your python scripts. An easy one using a python tool named **PyArmor** which relies on an external unknown not open-source
 library and a solider one using a tool which I appreciate whose name is **Enigma Protector** (it protects executable on windows 💠).
 
 ## 🛡 Using [PyArmor](https://github.com/dashingsoft/pyarmor)
@@ -131,7 +130,7 @@ We want to protect the program and not only the script.
 pyarmor obfuscate main.py  --output protected_program
 ```
 
-The two scripts are now obfuscated in `protected_program`
+The two scripts are now obfuscated in `protected_program` directory.
 
 ### 🔐 Hardware lock (protect)
 
@@ -141,7 +140,7 @@ Our program is not protected, it can be run by anyone. In order to protect-it we
 pyarmor obfuscate main.py  --with-license outer --output register_program
 ```
 
-Running the program gives us
+Running the program gives us :
 
 ```bash
 C:\Users\remi\AppData\Local\pypoetry\Cache\virtualenvs\protect-python-knxkg4Ko-py3.10\Scripts\python.exe C:/Users/remi/Documents/PyCharmProjects/protect-python/register_program/main.py
@@ -158,7 +157,7 @@ We want to generate some licence files for decryption. Here are the options :
 -x, --bind-data DATA           Pass extra data to license, used to extend license type
 ```
 
-We are changing our program `main.py` to `main_pyarmor.py`
+We are changing our program `main.py` to `main_pyarmor.py` to extract some data bind when generating the licence.
 
 ```python
 from fibonacci import fibonacci
@@ -198,20 +197,20 @@ pyarmor licenses --expired 2019-10-10 --bind-data "MY_PROGRAM_V2" lic001
 |:--:| 
 | The licence file is generated in the `lic001` folder |
 
-Running the program failed logically cause the licence is expired
+Running the program failed logically cause the licence is expired :
 
 ```bash
 C:\Users\remi\AppData\Local\pypoetry\Cache\virtualenvs\protect-python-knxkg4Ko-py3.10\Scripts\python.exe C:/Users/remi/Documents/PyCharmProjects/protect-python/register_program/main_pyarmor.py
 > License is expired
 ```
 
-Generation of a new licence
+Generation of a new licence :
 
 ```bash
 pyarmor licenses --expired 2025-10-10 --bind-disk "FV994730S6LLF07AY" --bind-data "MY_PROGRAM_V2" lic002
 ```
 
-Everything works as excepted
+Everything works as excepted :
 
 ```bash
 C:\Users\remi\AppData\Local\pypoetry\Cache\virtualenvs\protect-python-knxkg4Ko-py3.10\Scripts\python.exe C:/Users/remi/Documents/PyCharmProjects/protect-python/register_program/main_pyarmor.py
@@ -231,7 +230,7 @@ Sometimes it's useful to pack the program in a standalone executable, in order t
 pyarmor pack main_pyarmor.py --with-license outer
 ```
 
-A `dist` folder is created and the **protected executable** is inside. Copy the **licence.lic** file and run the program, that's all !
+A `dist` folder is created and the **protected executable** is inside. Copy the **licence.lic** file and run the program, that's all ! If you want to customize the executable please read the manual.
 
 ## 🔮 Using [EnigmaProtector](https://enigmaprotector.com/)
 
@@ -242,7 +241,7 @@ Difficulty to implement : ⭐⭐⭐
 |:-----------------------------------:|:----------------------------------------:|
 |        Very good protection         |               Only Windows               |
 |            Trial control            | Using external program (not open-source) |
-|        Registration manager         |    199 $ + 69 $ / year update by dev.    |
+|        Registration manager         |   199 \$ + 69 \$ / year update by dev.   |
 |          Licensing system           |     Need Cython and MSVC to compile      |
 |       Wide range of check-up        |       Protect sensitive parts only       |
 |          Hardware Lock ++           |                                          |
@@ -252,7 +251,7 @@ Difficulty to implement : ⭐⭐⭐
 |       Virtual Machine (RISC)        |                                          |
 |  Independant of new python version  |                                          |
 
-## 🔧 Prerequisites
+### 🔧 Prerequisites
 
 - **Microsoft windows** (enigma protector works natively on windows, 🍷 wine is suitable for running EXE on 🐧 Linux )
 - Cython
@@ -260,7 +259,7 @@ Difficulty to implement : ⭐⭐⭐
 - The [enigma protector software](https://enigmaprotector.com/) (199$), the trial version will raise some alerts from antivirus, cause some crackers & hackers use it to
   protect/hide their malwares.
 
-## ⚙ Installing and using Cython
+### ⚙ Installing and using Cython
 
 ```{admonition} About Cython
 Cython is a programming language that aims to be a superset of the Python programming language, designed to give C-like performance with code that is written mostly in Python with optional additional C-inspired syntax. Cython is a compiled language that is typically used to generate CPython extension modules.
@@ -268,13 +267,13 @@ Cython is a programming language that aims to be a superset of the Python progra
 
 Cython could generate with your Python code a **c++ file** which could be compiled in a dynamic link library (DLL) which could be directly called by your python code.
 
-### 🔰 Install Cython
+#### 🔰 Install Cython
 
 ```bash
 pip install cython
 ```
 
-### 🔄 Convert our first program
+#### 🔄 Convert our first program
 
 The first file is the python file script you want to convert in C. Please note the extension **.pyx**.
 File : `fib.pyx`
@@ -312,9 +311,10 @@ python setup.py build_ext --inplace
 It converts it in `c` and compile with `msvc` in `fib.cp38-win_amd64.pyd`
 
 | ![Image 1](../../_medias/informatique/python/shareware1.png)
-|:--:| | * **DLL Export Viewer** tells us this is a valid DLL* |
+|:--:| 
+| **DLL Export Viewer** tells us this is a valid DLL |
 
-Calling the dll created is really easy from python. Python treats it like a module.
+Calling the DLL created is really easy from python. Python treats it like a module :
 
 ```python
 import fib
@@ -322,13 +322,13 @@ import fib
 fib.fib(50000000)  # will give the expected result
 ```
 
-## 🛡 Protecting your app
+### 🛡 Protecting your app
 
 The goal is to protect your python app. In order to do this, you will need :
 
 - some of your most important code in a `.pyx file` which will be converted in `c++`, this code will be protected
 - call the API of enigma protector to introduce the protection (RISC virtual machine etc.)
-- packed the dll produced by cython with enigma protector
+- packed the DLL produced by cython with enigma protector
 - Use it !
 
 ```{important}
@@ -378,12 +378,18 @@ LPCWSTR __declspec(dllimport) __stdcall EP_RegHardwareIDW();
 ```
 ````
 
+I will not copy all the manual in this article, if you want more infos about the API please read the manual.
+
 ### ➕ Add enigma headers files in working dir
 
 In order to compile, you need to move two files from the sdk/VC path of *Enigma Protector*. You will need to use MSVC.
 File 1 : `enigma_ide.h`
 File 2 : `enigma_ide64.lib`
-![Image 2](../../_medias/informatique/python/shareware2.png)
+
+| ![Image 1](../../_medias/informatique/python/shareware2.png)
+|:--:| 
+| Copy two files in the project folder |
+
 In `enigma_ide.h`, just insert the following line.
 
 ```cpp
@@ -397,41 +403,30 @@ File : `script_test.pyx`
 ```python
 # distutils: language = c++
 # cython: language_level=3
-# Declare EP_Marker function in enigma_ide64.lib
-cdef
-extern
-from
 
-"enigma_ide.h":
-void
-EP_Marker(char * Name)
-# Declare EP_RegHardwareID function in enigma_ide64.lib
-cdef
-extern
-from
-
-"enigma_ide.h":
-char * EP_RegHardwareID()
+# import functions from enigma_ide64.lib
+cdef extern from "enigma_ide.h":
+    void EP_Marker(char* Name)
+    char* EP_RegHardwareID()
 
 
 # Declare a trivial function
 def sum_it(number1, number2):
     return number1 + number2
 
-
 # Call and print the EP_RegHardwareID
-print(EP_RegHardwareID())
-# Crypt this stuff which will only be decrypt with registration
-EP_Marker("reg_crypt_begin1")
-print("This part is totally crypted")
-EP_Marker("reg_crypt_end1")
-# Protect this with virtualization
+ansi_str_hid = str(EP_RegHardwareID(), 'cp1252')
+print('ANSI :', ansi_str_hid)
+
+
+# Protect this with RISC virtualization
 EP_Marker("vm_risc_begin")
 a = 4
 b = 7
 c = a + b
 print('Virtualized :', c)
 EP_Marker("vm_risc_end")
+
 # Classic python code
 print("Give me the sum :", sum_it(1, 2))
 input("End, press key")
@@ -443,49 +438,280 @@ Convert and build with `msvc`
 python setup.py build_ext --inplace
 ```
 
-Protect the DLL with *Enigma Protector*
-![Image 3](../../_medias/informatique/python/shareware3.png)
-Use-it like a normal module
+| ![Image 1](../../_medias/informatique/python/shareware3.png)
+|:--:| 
+| Use-it like a normal module |
 
 ```python
 import test_it
 ```
 
-![Image 4](../../_medias/informatique/python/shareware4.png)
+| ![Image 1](../../_medias/informatique/python/shareware4.png)
+|:--:| 
+| **Output** |
 
-### 👓 Hardware Lock
+### 🎇 Using Widestring Char (unicode) in Cython - **wchar_t***
 
-### 👓 Test registration
-
-### 👓 Access registred feature
-
-### 👓 File virtualization
-
-### 👓 Protected strings
-
-## 🎇 BONUS : Using Widestring Char (unicode) in Cython - **wchar_t***
+Sometimes it's necessary to use more than ANSI characters, in order to use WideChar it's necessary to adapt the code.
 
 ```python
-from cpython.ref cimport
+# distutils: language = c++
+# cython: language_level=3
 
-PyObject
-from libc.stddef cimport
+# Imports and declaration to work fromWideChar
+from cpython.ref cimport PyObject
+from libc.stddef cimport wchar_t
 
-wchar_t
-cdef
-extern
-from
+cdef extern from "Python.h":
+    PyObject * PyUnicode_FromWideChar(wchar_t *w, Py_ssize_t size)
 
-"Python.h":
-PyObject * PyUnicode_FromWideChar(wchar_t * w, Py_ssize_t
-size)
-cdef
-extern
-from
+# import functions from enigma_ide64.lib
+cdef extern from "enigma_ide.h":
+    void EP_Marker(char* Name)
+    char* EP_RegHardwareID()
+    wchar_t * EP_RegHardwareIDW()
 
-"enigma_ide.h":
-wchar_t * EP_RegHardwareIDW()
-cdef
-PyObject * pystr = PyUnicode_FromWideChar(EP_RegHardwareIDW(), -1)
-print( < object > pystr)
+# Declare a trivial function
+
+def sum_it(number1, number2):
+    return number1 + number2
+
+# Call and print the EP_RegHardwareID
+ansi_str_hid = str(EP_RegHardwareID(), 'cp1252')
+print('ANSI :', ansi_str_hid)
+
+cdef PyObject * pystr = PyUnicode_FromWideChar(EP_RegHardwareIDW(), -1)
+wide_str_hid = str(<object> pystr)
+print('WideChar :', wide_str_hid)
+
+
+# Protect this with RISC virtualization
+EP_Marker("vm_risc_begin")
+a = 4
+b = 7
+c = a + b
+print('Virtualized :', c)
+EP_Marker("vm_risc_end")
+
+# Classic python code
+print("Give me the sum :", sum_it(1, 2))
+input("End, press key")
+
 ```
+
+```bash
+python setup.py build_ext --inplace
+```
+
+```bash
+🛡️ Protect with Enigma ⚔️
+```
+
+```python
+import test_it
+> ANSI : 02EF34-F57F02
+> WideChar : 02EF34-F57F02
+> Virtualized : 11
+> Give me the sum : 3
+> End, press key
+```
+
+### 🔏 Registration feature
+
+In order to test registration features we need to add to our program some code which will only be executed if the user is registered :
+
+```python
+# Crypt this stuff which will only be decrypted with registration
+EP_Marker("reg_crypt_begin1")
+print("This is an encrypted section")
+nbr = input("Enter a number : ")
+print(nbr + " + 5 = ", str(int(nbr) + 5))
+EP_Marker("reg_crypt_end1")
+```
+
+First you need to generate a key, please note that in this article I will use WideChar (Unicode in configuration). It's more complex than ANSI, if you understand with unicode, it will be straightforward for ANSI.
+
+| ![Image 1](../../_medias/informatique/python/shareware6.png)
+|:--:| 
+| **Generate** a new key for testing |
+
+#### Registration dialog
+
+If you want to use the registration dialog just use the dedicated API
+
+```python
+cdef extern from "enigma_ide.h":
+    void EP_RegShowDialog()
+
+if not registered:
+    EP_RegShowDialog()
+```
+
+After registering the software it will **decrypt** the first section ahead. 
+
+
+#### Manual registration
+
+I prefer handle myself the registration
+
+```python
+cdef extern from "Python.h":
+    wchar_t * PyUnicode_AsWideCharString(object, Py_ssize_t *)
+
+# Declare function in enigma_ide64.lib
+cdef extern from "enigma_ide.h":
+    bool EP_RegCheckAndSaveKeyW(wchar_t * Name, wchar_t * Key);
+```
+
+As an example I will try with two keys, one legit and one false.
+
+```python
+
+reg_name = u"Test-WrongUSER"
+reg_key = u"CKML369-XGSH5DW-RVG2ANU-W4FG4K4-J2RQYHM-32SD3LD-XJPKSYB-S5RPPPE-SEURZXQ"
+reg_name_2 = "Rémi MEVAERE"
+reg_key_2 = "CKML369-XGSH5DW-RVG2ANU-W4FG4K4-J2RQYHM-32SD3LD-XJPKSYB-S5RPPPE-SEURZXQ"
+cdef Py_ssize_t length
+cdef wchar_t *reg_name_wchar = PyUnicode_AsWideCharString(reg_name, &length)
+cdef wchar_t *reg_key_wchar = PyUnicode_AsWideCharString(reg_key, &length)
+cdef wchar_t *reg_name_wchar_2 = PyUnicode_AsWideCharString(reg_name_2, &length)
+cdef wchar_t *reg_key_wchar_2 = PyUnicode_AsWideCharString(reg_key_2, &length)
+
+print("Registration to : ", reg_name)
+if EP_RegCheckAndSaveKeyW(reg_name_wchar, reg_key_wchar):
+    print("Registration OK, please restart APP")
+    quit()
+else:
+    print("Registration ERROR")
+
+print("Registration to : ", reg_name_2)
+if EP_RegCheckAndSaveKeyW(reg_name_wchar_2, reg_key_wchar_2):
+    print("Registration OK, please restart APP")
+    quit()
+else:
+    print("Registration ERROR")
+```
+
+#### Test registration
+
+You can use the encrypted section (EP_Marker) to know if the registration succeed. But I prefer using this function in the API :
+
+```python
+cdef extern from "enigma_ide.h":
+    int EP_RegKeyStatus();
+
+registered = False
+if EP_RegKeyStatus() == 1:
+    registered = True
+
+if registered:
+    print("You are registered")
+else:
+    print("You are NOT registered")
+```
+
+### 🗃️ File virtualization
+
+It's possible to hide some files inside the executable. You will access to these files directly from your script.
+
+| ![Image 1](../../_medias/informatique/python/shareware5.png)
+|:--:| 
+| **Add** a file `virtual_file.txt` with some text |
+
+You could read the file with python easily :
+
+```python
+with open('virtual_file.txt') as f:
+    lines = f.readlines()
+
+print("------- virtual_file.txt -------")
+print(lines)
+print("--------------------------------")
+```
+
+### 🧵 Protected strings
+
+You can add some sensible protected strings in your code. We will see in this section how to retrieve them :
+
+| ![Image 1](../../_medias/informatique/python/shareware7.png)
+|:--:| 
+| **Add** some strings in Enigma Protector |
+
+#### API : Extract AnsiString or binary file
+
+No problem in this case, cause enigma.h expose a function accepting **char*** string.
+
+```python
+from libcpp cimport bool
+from libc.stdlib cimport malloc, free
+
+cdef extern from "enigma_ide.h":
+    int EP_ProtectedStringByID(int ID, char * Buffer, int Len);
+```
+
+Extract the string :
+
+```python
+buf_size = EP_ProtectedStringByID(2, b'', 0)
+print("Size of the string #2: ", buf_size)
+
+cdef char * buf_string_2 = <char *> malloc((buf_size + 1) * sizeof(char))
+
+if EP_ProtectedStringByID(2, buf_string_2, buf_size) != 0:
+    print(str(buf_string_2, 'cp1252'))
+else:
+    print("Error can't extract #2")
+
+free(buf_string_2)
+```
+
+Extract the binary data :
+
+```python
+
+buf_size = EP_ProtectedStringByID(3, b'', 0)
+print("Size of the string #3: ", buf_size)
+
+cdef char * buf_string_3 = <char *> malloc((buf_size + 1) * sizeof(char))
+
+if EP_ProtectedStringByID(3, buf_string_3, buf_size) != 0:
+    print(buf_string_3)
+else:
+    print("Error can't extract #3")
+    
+free(buf_string_3)
+```
+
+#### API : Extract WideString
+
+There is a problem with the API provided by Enigma, first you need to change the signature of **EP_ProtectedStringByID** in `enigma.h`
+
+```C
+// Protection API
+//int __declspec(dllimport) __stdcall EP_ProtectedStringByID( int ID, const char* Str, int Len);
+int __declspec(dllimport) __stdcall EP_ProtectedStringByID( int ID, const wchar_t* Str, int Len);
+int __declspec(dllimport) __stdcall EP_ProtectedStringByKey( const char* Key, const char* Str, int Len);
+```
+
+```python
+
+empty = ''
+cdef wchar_t *empty_wchar = PyUnicode_AsWideCharString(empty, &length)
+
+buf_size = EP_ProtectedStringByID(1, empty_wchar, 0) 
+print("Size of the string #1: ", buf_size)
+
+cdef wchar_t * buf_string = <wchar_t *> malloc((buf_size // sizeof(wchar_t) + 1) * sizeof(wchar_t))
+cdef PyObject * pystr_2
+
+if EP_ProtectedStringByID(1, buf_string, buf_size) != 0:
+    pystr_2 = PyUnicode_FromWideChar(buf_string, -1)
+    wide_string = str(<object> pystr_2)
+    print('WideString :', wide_string)
+else:
+    print("Error can't extract #1")
+```
+
+# 💁🏻‍♂️Conclusion
+
+In this article, we have seen how to protect our python program or some sensitive parts that we don't want to share. Each time, we have to trust an external program (not open-source). The performance will be degraded.
