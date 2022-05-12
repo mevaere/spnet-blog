@@ -32,7 +32,7 @@ release = '0.0.0.0'
 extensions = [
     # "myst_parser",
     "sphinx_copybutton",
-    "myst_nb"
+    "myst_parser"
 ]
 
 myst_enable_extensions = ["dollarmath", "amsmath"]

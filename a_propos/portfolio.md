@@ -163,7 +163,7 @@
 
 ```{image} ../_medias/a_propos/cp_cmc.gif
 :width: 400px
-:target: 
+:target: None
 :align: center
 ```
 
